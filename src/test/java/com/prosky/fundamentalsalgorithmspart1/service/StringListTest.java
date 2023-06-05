@@ -15,12 +15,17 @@ public class StringListTest {
         stringList.add("a");
         stringList.add("b");
         stringList.add("c");
+//        stringList.add("e");
 //        stringList.add("d");
     }
 
     @Test
     public void addTest() {
-        Assertions.assertEquals("e", stringList.add("e"));
+//        org.assertj.core.api.Assertions.assertThat("e");
+        String expected = "e";
+        String actual = stringList.add("e");
+//    Assertions.assertEquals("e", stringList.add("e"));
+   Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -82,6 +87,12 @@ public class StringListTest {
         assertThrows(ArrayIndexOutBondsException.class, () -> {
             stringList.remove(5);
         });
+    }
+
+    @Test
+    public void containsTest() {
+        Assertions.assertTrue(stringList.contains("a"));
+        Assertions.assertFalse(stringList.contains("v"));
     }
 
     @Test

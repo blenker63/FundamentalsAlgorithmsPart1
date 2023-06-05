@@ -3,13 +3,15 @@ package com.prosky.fundamentalsalgorithmspart1.service;
 public class StringList implements StringListService {
 
     private String[] stringList = new String[5];
+//    private String[] otherList = new String[5];
     private int size = 0;
     public int index = 0;
+//    public int index;
     public String removeItem;
 
     @Override
     public String add(String item) {
-        if (size < stringList.length) {
+        if (size <= stringList.length) {
             stringList[index] = item;
             size++;
             index++;
@@ -17,12 +19,13 @@ public class StringList implements StringListService {
         } else {
             throw new ArrayIndexOutBondsException("Массив переполнен");
         }
+//    return add(index, item);
     }
 
     @Override
     public String add(int index, String item) {
 //        if (size >= (stringList.length) || index >= stringList.length - 1) {
-        if (index >= size || index >= stringList.length - 1) {
+        if (index > size || index >= stringList.length - 1) {
             throw new ArrayIndexOutBondsException("Индекс выходит за пределы количества элементов или массива.");
         }
         for (int i = stringList.length - 1; i == index; i--) {
@@ -76,7 +79,13 @@ public class StringList implements StringListService {
 
     @Override
     public boolean contains(String item) {
-        return false;
+        boolean containsItem = false;
+        for (int i = 0; i < stringList.length; i++) {
+            if (stringList[i] == item) {
+                containsItem = true;
+            }
+        }
+        return containsItem;
     }
 
     @Override
@@ -116,7 +125,18 @@ public class StringList implements StringListService {
 
     @Override
     public boolean equals(StringList otherList) {
-//        AssertionError
+//        String[] otherList = new String[];
+//        boolean equalsItem = true;
+//        for (int i = 0; i < stringList.length; i++) {
+//            for (int j = 0; j < stringList.length; j++) {
+//                if (stringList[i] != otherList[j]) {
+//                  equalsItem = false;
+//                }
+//
+//            }
+//        }
+
+//        return equalsItem;
         return false;
     }
 
@@ -147,6 +167,7 @@ public class StringList implements StringListService {
 
     @Override
     public String[] toArray() {
+        
         return new String[0];
     }
 
