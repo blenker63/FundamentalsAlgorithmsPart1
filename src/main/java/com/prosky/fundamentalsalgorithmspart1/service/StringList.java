@@ -49,14 +49,14 @@ public class StringList implements StringListService {
     @Override
     public String remove(String item) {
         for (int i = 0; i < stringList.length - 1; i++) {
-//            if (stringList[i] != item) {
-//            }
             if (stringList[i] == item) {
                 removeItem = stringList[i];
                 stringList[i] = null;
-//                removeItem = stringList[i];
                 size--;
                 break;
+                }
+                for (int j = i; j < stringList.length-1; j++) {
+                    stringList[j] = stringList[i + 1];
             }
         }
         return removeItem;
@@ -74,6 +74,10 @@ public class StringList implements StringListService {
             stringList[index] = null;
             size--;
         }
+        for (int i = index; i < stringList.length-1; i++) {
+            stringList[i] = stringList[index+ 1];
+        }
+
         return removeItem;
     }
 
@@ -167,7 +171,7 @@ public class StringList implements StringListService {
 
     @Override
     public String[] toArray() {
-        
+
         return new String[0];
     }
 
