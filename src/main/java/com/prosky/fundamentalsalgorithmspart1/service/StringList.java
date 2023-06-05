@@ -1,5 +1,7 @@
 package com.prosky.fundamentalsalgorithmspart1.service;
 
+import java.util.Arrays;
+
 public class StringList implements StringListService {
 
     private String[] stringList = new String[5];
@@ -172,15 +174,11 @@ public class StringList implements StringListService {
     @Override
     public String[] toArray() {
         int n = stringList.length;
-        String[] toArray = new String[n];
-        for (int i = 0; i < stringList.length; i++) {
-            if (stringList[i] != null) {
-                toArray[i] = stringList[i];
-            } else {
-                toArray[i] = null;
-            }
-        }
-        return new String[n];
+        String[] toArrayMas = null;
+        String[] toArray = Arrays.copyOf(stringList, n);
+        toArrayMas = toArray;
+        return  toArrayMas;
     }
 
 }
+
