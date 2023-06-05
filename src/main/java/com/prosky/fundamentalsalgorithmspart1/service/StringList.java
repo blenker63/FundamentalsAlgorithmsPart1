@@ -11,7 +11,7 @@ public class StringList implements StringListService {
 
     @Override
     public String add(String item) {
-        if (size <= stringList.length) {
+        if (size < stringList.length) {
             stringList[index] = item;
             size++;
             index++;
@@ -171,8 +171,16 @@ public class StringList implements StringListService {
 
     @Override
     public String[] toArray() {
-
-        return new String[0];
+        int n = stringList.length;
+        String[] toArray = new String[n];
+        for (int i = 0; i < stringList.length; i++) {
+            if (stringList[i] != null) {
+                toArray[i] = stringList[i];
+            } else {
+                toArray[i] = null;
+            }
+        }
+        return new String[n];
     }
 
 }

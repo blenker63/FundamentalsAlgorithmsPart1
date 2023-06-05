@@ -135,4 +135,13 @@ public class StringListTest {
 
     }
 
+    @Test
+    public void toArrayTest() {
+//        String [] expected = new String[];
+        String [] expected = {"a", "b", "c", null, null};
+        Assertions.assertArrayEquals(expected, stringList.toArray());
+//        Assertions.assertArrayEquals(expected, stringList.toArray("g", "h", "j"));
+
+    }
+
 }
