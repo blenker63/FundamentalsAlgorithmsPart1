@@ -5,10 +5,8 @@ import java.util.Arrays;
 public class StringList implements StringListService {
 
     private String[] stringList = new String[5];
-//    private String[] otherList = new String[5];
     private int size = 0;
     public int index = 0;
-//    public int index;
     public String removeItem;
 
     @Override
@@ -17,16 +15,14 @@ public class StringList implements StringListService {
             stringList[index] = item;
             size++;
             index++;
-            return stringList[index];
+            return stringList[index-1];
         } else {
             throw new ArrayIndexOutBondsException("Массив переполнен");
         }
-//    return add(index, item);
     }
 
     @Override
     public String add(int index, String item) {
-//        if (size >= (stringList.length) || index >= stringList.length - 1) {
         if (index > size || index >= stringList.length - 1) {
             throw new ArrayIndexOutBondsException("Индекс выходит за пределы количества элементов или массива.");
         }
@@ -131,18 +127,6 @@ public class StringList implements StringListService {
 
     @Override
     public boolean equals(StringList otherList) {
-//        String[] otherList = new String[];
-//        boolean equalsItem = true;
-//        for (int i = 0; i < stringList.length; i++) {
-//            for (int j = 0; j < stringList.length; j++) {
-//                if (stringList[i] != otherList[j]) {
-//                  equalsItem = false;
-//                }
-//
-//            }
-//        }
-
-//        return equalsItem;
         return false;
     }
 
