@@ -5,27 +5,30 @@ import java.util.Arrays;
 public class StringList implements StringListService {
 
     private String[] stringList = new String[5];
-    private int size = 1;
-    public int index;
+//    private String[] otherList = new String[5];
+    private int size = 0;
+    public int index = 0;
+//    public int index;
     public String removeItem;
 
     @Override
     public String add(String item) {
-        index = size - 1;
         if (size < stringList.length) {
             stringList[index] = item;
             size++;
+            index++;
             return stringList[index];
         } else {
-            throw new EmployeeStoragelsFullException("Массив переполнен");
+            throw new ArrayIndexOutBondsException("Массив переполнен");
         }
+//    return add(index, item);
     }
 
     @Override
     public String add(int index, String item) {
 //        if (size >= (stringList.length) || index >= stringList.length - 1) {
-        if (index >= size || index >= stringList.length - 1) {
-            throw new EmployeeStoragelsFullException("Индекс выходит за пределы количества элементов или массива.");
+        if (index > size || index >= stringList.length - 1) {
+            throw new ArrayIndexOutBondsException("Индекс выходит за пределы количества элементов или массива.");
         }
         for (int i = stringList.length - 1; i == index; i--) {
             stringList[i] = stringList[i - 1];
@@ -38,7 +41,7 @@ public class StringList implements StringListService {
     @Override
     public String set(int index, String item) {
         if (index >= size || index >= stringList.length - 1) {
-            throw new EmployeeStoragelsFullException("Индекс выходит за пределы количества элементов или массива.");
+            throw new ArrayIndexOutBondsException("Индекс выходит за пределы количества элементов или массива.");
         }
         stringList[index] = item;
 
@@ -53,6 +56,9 @@ public class StringList implements StringListService {
                 stringList[i] = null;
                 size--;
                 break;
+                }
+                for (int j = i; j < stringList.length-1; j++) {
+                    stringList[j] = stringList[i + 1];
             }
         }
         return removeItem;
@@ -60,51 +66,119 @@ public class StringList implements StringListService {
 
     @Override
     public String remove(int index) {
-        return null;
+        if (index > stringList.length - 1) {
+            throw new ArrayIndexOutBondsException("Индекс выходит за пределы массива");
+        }
+        if (stringList[index] == null) {
+            throw new ElementMissingException("Элемент отсутствует");
+        } else {
+            removeItem = stringList[index];
+            stringList[index] = null;
+            size--;
+        }
+        for (int i = index; i < stringList.length-1; i++) {
+            stringList[i] = stringList[index+ 1];
+        }
+
+        return removeItem;
     }
 
     @Override
     public boolean contains(String item) {
-        return false;
+        boolean containsItem = false;
+        for (int i = 0; i < stringList.length; i++) {
+            if (stringList[i] == item) {
+                containsItem = true;
+            }
+        }
+        return containsItem;
     }
 
     @Override
     public int indexOf(String item) {
-        return 0;
+        int indexOf = -1;
+        for (int i = 0; i < stringList.length; i++) {
+            if (stringList[i] == item) {
+                indexOf = i;
+            }
+        }
+        return indexOf;
+
     }
 
     @Override
     public int lastIndexOf(String item) {
-        return 0;
+        int LastIndexOf = -1;
+        for (int i = stringList.length - 1; i >= 0; i--) {
+            if (stringList[i] == item) {
+                LastIndexOf = i;
+                break;
+            }
+        }
+        return LastIndexOf;
+
     }
 
     @Override
     public String get(int index) {
-        return null;
+        String getItem = null;
+        if (index > stringList.length - 1) {
+            throw new ArrayIndexOutBondsException("Индекс выходит за пределы массива");
+        }
+        getItem = stringList[index];
+        return getItem;
     }
 
     @Override
     public boolean equals(StringList otherList) {
+//        String[] otherList = new String[];
+//        boolean equalsItem = true;
+//        for (int i = 0; i < stringList.length; i++) {
+//            for (int j = 0; j < stringList.length; j++) {
+//                if (stringList[i] != otherList[j]) {
+//                  equalsItem = false;
+//                }
+//
+//            }
+//        }
+
+//        return equalsItem;
         return false;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        boolean isEmpty = true;
+        for (int i = 0; i < stringList.length; i++) {
+            if (stringList[i] == null) {
+                isEmpty = false;
+                break;
+            }
+        }
+            return isEmpty;
     }
 
     @Override
-    public void clear() {
-
+    public Object clear() {
+        for (int i = 0; i < stringList.length; i++) {
+            stringList[i] = null;
+        }
+        return null;
     }
 
     @Override
     public String[] toArray() {
-        return new String[0];
+        int n = stringList.length;
+        String[] toArrayMas = null;
+        String[] toArray = Arrays.copyOf(stringList, n);
+        toArrayMas = toArray;
+        return  toArrayMas;
     }
+
 }
+

@@ -71,7 +71,7 @@ public interface StringListService {
     boolean isEmpty();
 
     // Удалить все элементы из списка.
-    void clear();
+    Object clear();
 
     // Создать новый массив
     // из строк в списке
